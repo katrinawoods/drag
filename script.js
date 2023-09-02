@@ -1,6 +1,6 @@
 const correctOrder = ["The", "library", "opened", "in", "the", "year", "2018"];
 let selectedItem = null;
-let draggedItem = null;
+let currentOrderIndex = 0; // Keep track of the current correct word index
 
 document.addEventListener("DOMContentLoaded", function(event) {
     const shuffledOrder = shuffleArray([...correctOrder]);
@@ -18,40 +18,31 @@ function shuffleArray(array) {
 }
 
 // Keyboard navigation
-document.querySelectorAll('.draggable').forEach((item, idx, array) => {
+document.querySelectorAll('.draggable').forEach((item) => {
     item.addEventListener('keydown', e => {
-        if (selectedItem && e.key === 'ArrowDown' && !selectedItem.parentElement.classList.contains('dropzone')) {
-            const availableDropzone = [...document.querySelectorAll('.dropzone')].find(dropzone => !dropzone.querySelector('.draggable'));
-            if (availableDropzone) {
-                availableDropzone.appendChild(selectedItem);
-            }
-        } else if (selectedItem && e.key === 'ArrowUp' && selectedItem.parentElement.classList.contains('dropzone')) {
-            const container = document.getElementById('container');
-            container.insertBefore(selectedItem, array[idx]);
-        } else if (selectedItem && e.key === 'ArrowRight' && selectedItem.parentElement.classList.contains('dropzone') && idx + 1 < array.length) {
-            const nextDropzone = document.querySelectorAll('.dropzone')[idx + 1];
-            if (!nextDropzone.querySelector('.draggable')) {
-                nextDropzone.appendChild(selectedItem);
-            }
-        } else if (selectedItem && e.key === 'ArrowLeft' && selectedItem.parentElement.classList.contains('dropzone') && idx - 1 >= 0) {
-            const prevDropzone = document.querySelectorAll('.dropzone')[idx - 1];
-            if (!prevDropzone.querySelector('.draggable')) {
-                prevDropzone.appendChild(selectedItem);
-            }
-        } else if (e.key === 'Enter' || e.key === 'Space') {
+        if (e.key === 'Enter' || e.key === 'Space') {
             if (selectedItem) {
                 selectedItem.style.backgroundColor = ''; 
                 selectedItem = null;
-            } else {
+            } else if (item.textContent === correctOrder[currentOrderIndex]) { // Check if selected word is the next correct word
                 selectedItem = item;
                 selectedItem.style.backgroundColor = 'lightblue';
+                
+                // Find the next available dropzone and move the item there
+                const availableDropzone = [...document.querySelectorAll('.dropzone')][currentOrderIndex];
+                if (availableDropzone) {
+                    availableDropzone.appendChild(selectedItem);
+                    selectedItem.style.backgroundColor = ''; // Reset background color when placed
+                    selectedItem = null; // Deselect the word
+                    currentOrderIndex++; // Move to the next correct word
+                }
             }
             e.preventDefault();
         }
     });
 });
 
-// Drag-and-drop logic for mouse
+// Mouse drag-and-drop logic (remains unchanged from previous code)
 document.querySelectorAll('.draggable').forEach(draggable => {
     draggable.addEventListener('dragstart', e => {
         draggedItem = draggable;
