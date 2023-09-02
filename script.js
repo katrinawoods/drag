@@ -1,8 +1,8 @@
 const correctOrder = ["The", "library", "opened", "in", "the", "year", "2018"];
 let selectedItem = null;
+let draggedItem = null;
 
 document.addEventListener("DOMContentLoaded", function(event) {
-    // Shuffle the words on initial load
     const shuffledOrder = shuffleArray([...correctOrder]);
     shuffledOrder.forEach((word, index) => {
         document.getElementById(`word${index + 1}`).textContent = word;
@@ -17,6 +17,7 @@ function shuffleArray(array) {
     return array;
 }
 
+// Keyboard navigation
 document.querySelectorAll('.draggable').forEach((item, idx, array) => {
     item.addEventListener('keydown', e => {
         if (selectedItem && e.key === 'ArrowDown' && !selectedItem.parentElement.classList.contains('dropzone')) {
@@ -39,15 +40,43 @@ document.querySelectorAll('.draggable').forEach((item, idx, array) => {
             }
         } else if (e.key === 'Enter' || e.key === 'Space') {
             if (selectedItem) {
-                selectedItem.style.backgroundColor = ''; // Reset background color when dropped
-                selectedItem = null; // Deselect the word
+                selectedItem.style.backgroundColor = ''; 
+                selectedItem = null;
             } else {
                 selectedItem = item;
-                selectedItem.style.backgroundColor = 'lightblue'; // Highlight background when selected
+                selectedItem.style.backgroundColor = 'lightblue';
             }
-            e.preventDefault(); // Prevent the default action (scrolling)
+            e.preventDefault();
         }
     });
 });
 
-// Existing drag and drop logic remains unchanged.
+// Drag-and-drop logic for mouse
+document.querySelectorAll('.draggable').forEach(draggable => {
+    draggable.addEventListener('dragstart', e => {
+        draggedItem = draggable;
+        setTimeout(() => {
+            draggable.style.display = 'none';
+        }, 0);
+    });
+
+    draggable.addEventListener('dragend', () => {
+        setTimeout(() => {
+            draggedItem.style.display = '';
+            draggedItem = null;
+        }, 0);
+    });
+});
+
+document.querySelectorAll('.dropzone').forEach(dropzone => {
+    dropzone.addEventListener('dragover', e => {
+        e.preventDefault();
+    });
+
+    dropzone.addEventListener('drop', e => {
+        e.preventDefault();
+        if (!dropzone.querySelector('.draggable') && draggedItem) {
+            dropzone.appendChild(draggedItem);
+        }
+    });
+});
