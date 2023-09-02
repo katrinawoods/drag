@@ -1,19 +1,26 @@
-<div id="words" class="container">
-  <span draggable="true" ondragstart="drag(event)" id="word1" data-word="The">The</span>
-  <span draggable="true" ondragstart="drag(event)" id="word2" data-word="library">library</span>
-  <span draggable="true" ondragstart="drag(event)" id="word3" data-word="opened">opened</span>
-  <span draggable="true" ondragstart="drag(event)" id="word4" data-word="in">in</span>
-  <span draggable="true" ondragstart="drag(event)" id="word5" data-word="the">the</span>
-  <span draggable="true" ondragstart="drag(event)" id="word6" data-word="year">year</span>
-  <span draggable="true" ondragstart="drag(event)" id="word7" data-word="2018">2018</span>
-</div>
+<!DOCTYPE html>
+<html lang="en">
 
-<div id="sentence" class="container">
-  <div ondrop="drop(event)" ondragover="allowDrop(event)" data-correct="The"></div>
-  <div ondrop="drop(event)" ondragover="allowDrop(event)" data-correct="library"></div>
-  <div ondrop="drop(event)" ondragover="allowDrop(event)" data-correct="opened"></div>
-  <div ondrop="drop(event)" ondragover="allowDrop(event)" data-correct="in"></div>
-  <div ondrop="drop(event)" ondragover="allowDrop(event)" data-correct="the"></div>
-  <div ondrop="drop(event)" ondragover="allowDrop(event)" data-correct="year"></div>
-  <div ondrop="drop(event)" ondragover="allowDrop(event)" data-correct="2018"></div>
-</div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drag and Drop Activity</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div id="container">
+        <div class="draggable" draggable="true" id="word1">The</div>
+        <div class="draggable" draggable="true" id="word2">library</div>
+        <div class="draggable" draggable="true" id="word3">opened</div>
+        <div class="draggable" draggable="true" id="word4">in</div>
+        <div class="draggable" draggable="true" id="word5">the</div>
+        <div class="draggable" draggable="true" id="word6">year</div>
+        <div class="draggable" draggable="true" id="word7">2018</div>
+    </div>
+    <div id="feedback"></div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
