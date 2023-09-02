@@ -1,26 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Drag and Drop Activity</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-    <div id="container">
-        <div class="draggable" draggable="true" id="word1">The</div>
-        <div class="draggable" draggable="true" id="word2">library</div>
-        <div class="draggable" draggable="true" id="word3">opened</div>
-        <div class="draggable" draggable="true" id="word4">in</div>
-        <div class="draggable" draggable="true" id="word5">the</div>
-        <div class="draggable" draggable="true" id="word6">year</div>
-        <div class="draggable" draggable="true" id="word7">2018</div>
-    </div>
-    <div id="feedback"></div>
 
-    <script src="script.js"></script>
+<div id="container" role="listbox">
+    <div class="draggable" tabindex="0" draggable="true" role="option" aria-grabbed="false" id="word1">The</div>
+    <div class="draggable" tabindex="0" draggable="true" role="option" aria-grabbed="false" id="word2">library</div>
+    <div class="draggable" tabindex="0" draggable="true" role="option" aria-grabbed="false" id="word3">opened</div>
+    <div class="draggable" tabindex="0" draggable="true" role="option" aria-grabbed="false" id="word4">in</div>
+    <div class="draggable" tabindex="0" draggable="true" role="option" aria-grabbed="false" id="word5">the</div>
+    <div class="draggable" tabindex="0" draggable="true" role="option" aria-grabbed="false" id="word6">year</div>
+    <div class="draggable" tabindex="0" draggable="true" role="option" aria-grabbed="false" id="word7">2018</div>
+</div>
+
+<script src="script.js"></script>
 </body>
-
 </html>
