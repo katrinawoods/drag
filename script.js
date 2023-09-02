@@ -17,7 +17,6 @@ shuffledOrder.forEach((word, index) => {
 });
 
 // Drag and Drop logic
-
 document.querySelectorAll('.draggable').forEach(draggable => {
     draggable.addEventListener('dragstart', e => {
         draggedItem = draggable;
@@ -42,29 +41,21 @@ document.querySelectorAll('.draggable').forEach(draggable => {
         if (e.target.className === 'draggable') {
             let referenceNode = (e.target.nextElementSibling !== draggedItem) ? e.target.nextElementSibling : e.target;
             e.target.parentNode.insertBefore(draggedItem, referenceNode);
-            checkOrder();
         }
     });
 });
 
 // Check the order of words
 function checkOrder() {
-    const correctOrder = ["The", "library", "opened", "in", "the", "year", "2018"];
-    const container = document.getElementById('container');
-    const draggables = container.querySelectorAll('.draggable');
-    
-    draggables.forEach((draggable, index) => {
-        if (draggable.textContent === correctOrder[index]) {
-            draggable.classList.add('correct');
-            draggable.classList.remove('incorrect');
+    let currentOrder = Array.from(document.querySelectorAll('.draggable')).map(item => item.textContent);
+    currentOrder.forEach((word, index) => {
+        if (word === correctOrder[index]) {
+            document.getElementById(`word${index + 1}`).style.backgroundColor = 'lightgreen';
         } else {
-            draggable.classList.add('incorrect');
-            draggable.classList.remove('correct');
+            document.getElementById(`word${index + 1}`).style.backgroundColor = 'lightcoral';
         }
     });
 }
-
-
 
 // Keyboard navigation
 document.querySelectorAll('.draggable').forEach((item, idx, array) => {
@@ -76,3 +67,6 @@ document.querySelectorAll('.draggable').forEach((item, idx, array) => {
         }
     });
 });
+
+// Check answer button event listener
+document.getElementById('checkAnswerButton').addEventListener('click', checkOrder);
