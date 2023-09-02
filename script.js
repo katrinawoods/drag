@@ -1,40 +1,71 @@
-document.addEventListener('dragstart', function(event) {
-    event.dataTransfer.setData('text/plain', event.target.id);
-});
+const correctOrder = ["The", "library", "opened", "in", "the", "year", "2018"];
+let draggedItem = null;
 
-document.addEventListener('dragover', function(event) {
-    event.preventDefault();
-});
-
-document.addEventListener('drop', function(event) {
-    event.preventDefault();
-
-    if (event.target.classList.contains('draggable')) {
-        const from = document.getElementById(event.dataTransfer.getData('text/plain'));
-        const to = event.target;
-
-        const fromClone = from.cloneNode(true);
-        const toClone = to.cloneNode(true);
-
-        from.parentNode.replaceChild(toClone, from);
-        to.parentNode.replaceChild(fromClone, to);
-
-        checkOrder();
+// Shuffle function for initial load
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]]; // Swap elements
     }
-});
-
-function checkOrder() {
-    const container = document.getElementById('container');
-    const words = Array.from(container.children).map(child => child.textContent);
-
-    const correctOrder = ["The", "library", "opened", "in", "the", "year", "2018"];
-    const feedback = document.getElementById('feedback');
-
-    if (JSON.stringify(words) === JSON.stringify(correctOrder)) {
-        feedback.textContent = 'Correct! The sentence is in the right order.';
-        feedback.style.color = 'green';
-    } else {
-        feedback.textContent = 'The sentence is not in the right order. Try again.';
-        feedback.style.color = 'red';
-    }
+    return array;
 }
+
+// Shuffle the words on initial load
+const shuffledOrder = shuffleArray([...correctOrder]);
+shuffledOrder.forEach((word, index) => {
+    document.getElementById(`word${index + 1}`).textContent = word;
+});
+
+// Drag and Drop logic
+
+document.querySelectorAll('.draggable').forEach(draggable => {
+    draggable.addEventListener('dragstart', e => {
+        draggedItem = draggable;
+        setTimeout(() => {
+            draggable.style.display = 'none';
+        }, 0);
+    });
+
+    draggable.addEventListener('dragend', () => {
+        setTimeout(() => {
+            draggedItem.style.display = '';
+            draggedItem = null;
+        }, 0);
+    });
+
+    document.getElementById('container').addEventListener('dragover', e => {
+        e.preventDefault();
+    });
+
+    document.getElementById('container').addEventListener('drop', e => {
+        e.preventDefault();
+        if (e.target.className === 'draggable') {
+            let referenceNode = (e.target.nextElementSibling !== draggedItem) ? e.target.nextElementSibling : e.target;
+            e.target.parentNode.insertBefore(draggedItem, referenceNode);
+            checkOrder();
+        }
+    });
+});
+
+// Check the order of words
+function checkOrder() {
+    let currentOrder = Array.from(document.querySelectorAll('.draggable')).map(item => item.textContent);
+    currentOrder.forEach((word, index) => {
+        if (word === correctOrder[index]) {
+            document.getElementById(`word${index + 1}`).style.backgroundColor = 'lightgreen';
+        } else {
+            document.getElementById(`word${index + 1}`).style.backgroundColor = 'lightcoral';
+        }
+    });
+}
+
+// Keyboard navigation
+document.querySelectorAll('.draggable').forEach((item, idx, array) => {
+    item.addEventListener('keydown', e => {
+        if (e.key === 'ArrowRight' && array[idx + 1]) {
+            array[idx + 1].focus();
+        } else if (e.key === 'ArrowLeft' && array[idx - 1]) {
+            array[idx - 1].focus();
+        }
+    });
+});
