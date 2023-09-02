@@ -49,15 +49,22 @@ document.querySelectorAll('.draggable').forEach(draggable => {
 
 // Check the order of words
 function checkOrder() {
-    let currentOrder = Array.from(document.querySelectorAll('.draggable')).map(item => item.textContent);
-    currentOrder.forEach((word, index) => {
-        if (word === correctOrder[index]) {
-            document.getElementById(`word${index + 1}`).style.backgroundColor = 'lightgreen';
+    const correctOrder = ["The", "library", "opened", "in", "the", "year", "2018"];
+    const container = document.getElementById('container');
+    const draggables = container.querySelectorAll('.draggable');
+    
+    draggables.forEach((draggable, index) => {
+        if (draggable.textContent === correctOrder[index]) {
+            draggable.classList.add('correct');
+            draggable.classList.remove('incorrect');
         } else {
-            document.getElementById(`word${index + 1}`).style.backgroundColor = 'lightcoral';
+            draggable.classList.add('incorrect');
+            draggable.classList.remove('correct');
         }
     });
 }
+
+
 
 // Keyboard navigation
 document.querySelectorAll('.draggable').forEach((item, idx, array) => {
