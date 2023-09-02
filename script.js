@@ -71,3 +71,19 @@ document.querySelectorAll('.dropzone').forEach(dropzone => {
         }
     });
 });
+
+document.getElementById("checkAnswerButton").addEventListener('click', () => {
+    checkOrder();
+});
+
+function checkOrder() {
+    const currentOrder = Array.from(document.querySelectorAll('.dropzone .draggable')).map(item => item.textContent);
+    currentOrder.forEach((word, index) => {
+        if (word === correctOrder[index]) {
+            document.getElementById(`word${index + 1}`).style.backgroundColor = 'lightgreen';
+        } else {
+            document.getElementById(`word${index + 1}`).style.backgroundColor = 'lightcoral';
+        }
+    });
+}
+
