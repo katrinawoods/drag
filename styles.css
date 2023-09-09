@@ -1,16 +1,66 @@
-.draggable {
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+#container {
+    width: 100%;
+    max-width: 1200px; /* You can adjust this based on your preference */
+    margin: 0 auto; /* Center the container */
+}
+
+.words-row, .dropzones-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.draggable, .dropzone {
+    flex: 1;
     padding: 10px;
-    border: 1px solid black;
-    margin: 5px;
-    cursor: pointer;
-    display: inline-block;
+    margin: 0 5px;
+    text-align: center;
+    cursor: pointer; /* Indicates interactivity */
+    transition: all 0.3s ease; /* Smoothens the outline transition */
+}
+
+.draggable {
+    border: 1px solid #ddd; /* A subtle border for draggable items */
+    background-color: #fff;
 }
 
 .dropzone {
-    width: 100px;
-    height: 40px;
-    margin: 5px;
-    border: 2px dashed gray;
-    display: inline-block;
-    vertical-align: top;
+    min-height: 50px;
+    border: 2px dashed #aaa;
+    background-color: #F9F9F9;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
 }
+
+.dropzone:active, .draggable:active {
+    outline: 2px solid #00C1D4; /* Outline when selected */
+}
+
+button {
+    display: block;
+    margin: 0 auto;
+    padding: 10px 20px;
+    background-color: #00C1D4;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #009BA9; /* A slightly darker shade for hover effect */
+}
+
+/* Additional styles for improved word wrapping and overflow management */
+.draggable {
+    word-wrap: break-word;
+    overflow: hidden;
+}
+
