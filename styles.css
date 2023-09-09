@@ -77,3 +77,9 @@ button:hover {
 #button-container {
     margin-top: 30px; /* Adds space between the drag activity and the button */
 }
+
+.myText {
+    color: navy;
+    font-style: normal;
+}
+
