@@ -90,8 +90,7 @@ button:hover {
 #feedback-container {
     display: flex;
     justify-content: flex-start;
-    font-size: 1.5em;
-    font-weight: bold;
+    font-family: Arial, sans-serif;
     margin-top: 20px;
     padding: 10px;
     border: 1px solid #ddd;
