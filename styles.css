@@ -1,38 +1,49 @@
 body {
-    font-family: Arial, sans-serif, navy;
+    font-family: Arial, sans-serif;
+    color: navy;   /* Moved the color property here */
     margin: 20px;
 }
 
 #container {
     width: 100%;
-    max-width: 1200px; /* You can adjust this based on your preference */
-    margin: 0 auto; /* Center the container */
-     color: navy;
-    font-style: normal
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
+/* Rows */
 .words-row, .dropzones-row {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
 }
 
-.draggable, .dropzone {
+/* Draggable Items */
+.draggable {
     flex: 1;
     padding: 10px;
     margin: 0 5px;
     text-align: center;
-    cursor: pointer; /* Indicates interactivity */
-    transition: all 0.3s ease; /* Smoothens the outline transition */
-}
-
-.draggable {
-    border: 1px solid #ddd; /* A subtle border for draggable items */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid #ddd;
     background-color: #f9F9F9;
+    word-wrap: break-word;
+    overflow: hidden;
 }
 
+.draggable:hover, .draggable:focus {
+    outline: 2px solid #00C1D4;
+}
+
+/* Drop Zones */
 .dropzone {
+    flex: 1;
     min-height: 50px;
+    padding: 10px;
+    margin: 0 5px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
     border: 2px dashed #aaa;
     background-color: #F9F9F9;
     display: flex;
@@ -40,10 +51,11 @@ body {
     justify-content: center; 
 }
 
-.dropzone:active, .draggable:active {
-    outline: 2px solid #00C1D4; /* Outline when selected */
+.dropzone:hover, .dropzone:focus, .dropzone:active {
+    outline: 2px solid #00C1D4;
 }
 
+/* Buttons */
 button {
     display: block;
     margin: 0 auto;
@@ -57,28 +69,26 @@ button {
 }
 
 button:hover {
-    background-color: #009BA9; /* A slightly darker shade for hover effect */
+    background-color: #009BA9;
 }
 
-/* Additional styles for improved word wrapping and overflow management */
-.draggable {
-    word-wrap: break-word;
-    overflow: hidden;
-}
-
-
-#title-container {
+/* Miscellaneous */
+#title-container, #instruction-container {
     margin-bottom: 20px;
-     color: navy;
-    font-style: normal
 }
 
 #instruction-container {
-     color: navy;
-    font-style: normal
     margin-bottom: 60px; /* Extra spacing after instructions */
 }
 
 #button-container {
-    margin-top: 30px; /* Adds space between the drag activity and the button */
+    margin-top: 30px;
 }
+
+.divider {
+    height: 20px; 
+    background-color: #cccccc; 
+    margin: 10px 0; 
+}
+
+
