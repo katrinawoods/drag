@@ -1,4 +1,4 @@
-//RSC referencing. drag and drop activity. Kate Woods, 2023.
+//RSC referencing. drag and drop activity. 2023.
 const correctOrder = ["A. Burrows, ", "Chemistry³: introducing inorganic, organic and physical chemistry, ", "Oxford University Press, ", "Oxford, ", "3rd edn., ", "2017."];
 
 let draggedItem = null;
@@ -82,11 +82,6 @@ document.querySelectorAll('.dropzone').forEach(dropzone => {
             dropzone.appendChild(draggedItem);
         }
     });
-});
-
-document.getElementById("checkAnswerButton").addEventListener('click', () => {
-    checkOrder();
-    document.getElementById("resetButton").style.display = 'block'; // This line will display the Reset button
 });
 
 function checkOrder() {
