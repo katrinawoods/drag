@@ -86,11 +86,9 @@ document.querySelectorAll('.dropzone').forEach(dropzone => {
 
 document.getElementById("checkAnswerButton").addEventListener('click', () => {
     checkOrder();
+    document.getElementById("resetButton").style.display = 'block'; // This line will display the Reset button
 });
 
-document.getElementById("resetButton").addEventListener('click', function() {
-    location.reload();  // This will refresh the current page
-});
 function checkOrder() {
     const currentOrder = Array.from(document.querySelectorAll('.dropzone .draggable')).map(item => item.textContent);
     let isCorrect = true;
