@@ -17,32 +17,7 @@ function shuffleArray(array) {
     return array;
 }
 
-// Keyboard navigation
-document.querySelectorAll('.draggable').forEach((item) => {
-    item.addEventListener('keydown', e => {
-        if (e.key === 'Enter' || e.key === 'Space') {
-            if (selectedItem) {
-                selectedItem.style.backgroundColor = ''; 
-                selectedItem = null;
-            } else if (item.textContent === correctOrder[currentOrderIndex]) { // Check if selected word is the next correct word
-                selectedItem = item;
-                selectedItem.style.backgroundColor = 'lightblue';
-                
-                // Find the next available dropzone and move the item there
-                const availableDropzone = [...document.querySelectorAll('.dropzone')][currentOrderIndex];
-                if (availableDropzone) {
-                    availableDropzone.appendChild(selectedItem);
-                    selectedItem.style.backgroundColor = ''; // Reset background color when placed
-                    selectedItem = null; // Deselect the word
-                    currentOrderIndex++; // Move to the next correct word
-                }
-            }
-            e.preventDefault();
-        }
-    });
-});
-
-// Mouse drag-and-drop logic (remains unchanged from previous code)
+// Mouse drag-and-drop controls
 document.querySelectorAll('.draggable').forEach(draggable => {
     draggable.addEventListener('dragstart', e => {
         draggedItem = draggable;
