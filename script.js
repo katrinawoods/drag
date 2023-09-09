@@ -1,5 +1,4 @@
-
-
+//RSC referencing. drag and drop activity. Kate Woods, 2023.
 const correctOrder = ["A. Burrows, ", "Chemistry³: introducing inorganic, organic and physical chemistry, ", "Oxford University Press, ", "Oxford, ", "3rd edn., ", "2017."];
 
 let draggedItem = null;
@@ -87,15 +86,11 @@ document.querySelectorAll('.dropzone').forEach(dropzone => {
 
 document.getElementById("checkAnswerButton").addEventListener('click', () => {
     checkOrder();
-    document.getElementById("resetButton").style.display = "block"; // Display the reset button after feedback
 });
 
-document.getElementById("resetButton").addEventListener('click', () => {
-    resetDraggables();
-    document.getElementById("feedback-container").textContent = ""; // Clear feedback message
-    document.getElementById("resetButton").style.display = "none"; // Hide reset button after resetting
+document.getElementById("resetButton").addEventListener('click', function() {
+    location.reload();  // This will refresh the current page
 });
-
 function checkOrder() {
     const currentOrder = Array.from(document.querySelectorAll('.dropzone .draggable')).map(item => item.textContent);
     let isCorrect = true;
@@ -124,11 +119,4 @@ function checkOrder() {
     }
 }
 
-function resetDraggables() {
-    const shuffledOrder = shuffleArray([...correctOrder]);
-    shuffledOrder.forEach((word, index) => {
-        document.getElementById(`word${index + 1}`).textContent = word;
-        const container = document.getElementById('container');
-        container.appendChild(document.getElementById(`word${index + 1}`));
-    });
-}
+
