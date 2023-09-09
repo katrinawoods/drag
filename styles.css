@@ -62,7 +62,7 @@ button {
     margin: 0 auto;
     padding: 10px 20px;
     background-color: #00C1D4;
-    color: #fff;
+    color: black;
     border: none;
     cursor: pointer;
     border-radius: 5px;
@@ -86,11 +86,6 @@ button:hover {
     margin-top: 30px;
 }
 
-.divider {
-    height: 20px; 
-    background-color: #cccccc; 
-    margin: 10px 0; 
-}
 
 #feedback-container {
     display: flex;
