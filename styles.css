@@ -100,3 +100,21 @@ button:hover {
     border: 1px solid #ddd;
     text-align: left;
 }
+
+.numbers-row, .dropzones-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.number, .dropzone {
+    flex: 1;
+    text-align: center;
+    margin: 5px;
+    height: 40px; /* Example height */
+    line-height: 40px; /* Centering text vertically */
+    border: 1px solid #ccc;
+}
+
+.dropzone {
+    background-color: #f4f4f4; /* Example background color for dropzones */
+}
