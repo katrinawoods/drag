@@ -3,12 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reference a book or ebook</title>
-
     <link rel="stylesheet" href="styles.css">
 </head>
+
+<div id="title-container">
+ <h1>Reference a book or ebook</h1>
+</div>
+
+<div id="instruction-container">
+    Instructions: Drag the parts of the reference into the correct order.
+</div>
+
+
 <body>
- Instructions: Drag the parts of the reference into the correct order.
+
 <div id="container" role="listbox">
 
     <div class="words-row">
@@ -30,7 +38,12 @@
         
     </div>
 </div>
-<button id="checkAnswerButton">Check Answer</button>
+
+<div id="button-container">
+    <button id="checkAnswerButton">Check Answer</button>
+</div>
+<div id="feedback-container"></div>
+
 
 <script src="script.js"></script>
 </body>
