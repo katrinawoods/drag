@@ -1,7 +1,9 @@
+
+
 const correctOrder = ["A. Burrows, ", "Chemistry³: introducing inorganic, organic and physical chemistry, ", "Oxford University Press, ", "Oxford, ", "3rd edn., ", "2017."];
 
 let draggedItem = null;
-let selectedItem = null; // Initialize selectedItem
+let selectedItem = null;
 
 document.addEventListener("DOMContentLoaded", function(event) {
     const shuffledOrder = shuffleArray([...correctOrder]);
@@ -51,6 +53,7 @@ document.querySelectorAll('.draggable').forEach((item, idx, array) => {
         }
     });
 });
+//end of keyboard controls
 
 // Mouse drag-and-drop controls
 document.querySelectorAll('.draggable').forEach(draggable => {
@@ -82,21 +85,20 @@ document.querySelectorAll('.dropzone').forEach(dropzone => {
     });
 });
 
-document.getElementById("actionButton").addEventListener('click', function() {
-    if (this.textContent === "Check Answer") {
-        checkOrder();
-        this.textContent = "Reset";  // Change button text to 'Reset'
-    } else if (this.textContent === "Reset") {
-        resetDraggables();
-        this.textContent = "Check Answer"; // Change button text back to 'Check Answer'
-        const feedbackContainer = document.getElementById("feedback-container");
-        feedbackContainer.textContent = ""; // Clear feedback message
-    }
+document.getElementById("checkAnswerButton").addEventListener('click', () => {
+    checkOrder();
+    document.getElementById("resetButton").style.display = "block"; // Display the reset button after feedback
+});
+
+document.getElementById("resetButton").addEventListener('click', () => {
+    resetDraggables();
+    document.getElementById("feedback-container").textContent = ""; // Clear feedback message
+    document.getElementById("resetButton").style.display = "none"; // Hide reset button after resetting
 });
 
 function checkOrder() {
     const currentOrder = Array.from(document.querySelectorAll('.dropzone .draggable')).map(item => item.textContent);
-    let isCorrect = true; // We assume the answer is correct initially
+    let isCorrect = true;
 
     currentOrder.forEach((word, index) => {
         const currentDropzone = document.getElementById(`drop${index + 1}`);
@@ -107,7 +109,7 @@ function checkOrder() {
                 draggableItem.style.backgroundColor = 'lightgreen';
             } else {
                 draggableItem.style.backgroundColor = 'lightcoral';
-                isCorrect = false; // If any word is incorrect, we update our assumption
+                isCorrect = false;
             }
         }
     });
@@ -127,8 +129,6 @@ function resetDraggables() {
     shuffledOrder.forEach((word, index) => {
         document.getElementById(`word${index + 1}`).textContent = word;
         const container = document.getElementById('container');
-        container.appendChild(document.getElementById(`word${index + 1}`)); // move them back to original position
+        container.appendChild(document.getElementById(`word${index + 1}`));
     });
 }
- 
-
