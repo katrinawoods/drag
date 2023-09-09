@@ -19,6 +19,10 @@ function shuffleArray(array) {
     return array;
 }
 
+document.getElementById("resetButton").addEventListener('click', function() {
+    location.reload();  // This will refresh the current page
+});
+
 //keyboard controls
 document.querySelectorAll('.draggable').forEach((item, idx, array) => {
     item.addEventListener('keydown', e => {
