@@ -113,14 +113,16 @@ function checkOrder() {
         }
     });
 
-    const feedbackContainer = document.getElementById("feedback-container");
-    if (isCorrect) {
-        feedbackContainer.textContent = "Correct! Well done.";
-        feedbackContainer.style.color = "green";
-    } else {
-        feedbackContainer.textContent = "Incorrect. Try again.";
-        feedbackContainer.style.color = "red";
-    }
+    const feedbackMessage = document.getElementById("feedback-message");
+
+if (isCorrect) {
+    feedbackMessage.textContent = "Correct! Well done.";
+    feedbackMessage.style.color = "green";
+} else {
+    feedbackMessage.textContent = "Incorrect. Try again.";
+    feedbackMessage.style.color = "red";
+}
+    
 }
 
 
