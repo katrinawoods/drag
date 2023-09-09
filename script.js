@@ -96,56 +96,29 @@ document.querySelectorAll('.dropzone').forEach(dropzone => {
 });
 
 //mobile
-// Mouse and touch drag-and-drop controls
 document.querySelectorAll('.draggable').forEach(draggable => {
-
-    const startDrag = () => {
-        draggedItem = draggable;
-        draggable.style.display = 'none';
-    };
-    
-    const endDrag = () => {
-        if (draggedItem) {
-            draggedItem.style.display = '';
-            draggedItem = null;
-        }
-    };
-
-    draggable.addEventListener('dragstart', startDrag);
-    draggable.addEventListener('dragend', endDrag);
-
-    // touch event equivalent for dragstart
     draggable.addEventListener('touchstart', e => {
         e.preventDefault();
-        startDrag();
-    });
-    
-    // touch event equivalent for dragend
-    draggable.addEventListener('touchend', e => {
-        e.preventDefault();
-        endDrag();
+        if (draggedItem) {
+            // If there's already a selected item, we deselect it (or put it down)
+            draggedItem.style.opacity = '1';
+        }
+        draggedItem = draggable;
+        draggable.style.opacity = '0.5'; // Give an indication that item is being picked up
     });
 });
 
 document.querySelectorAll('.dropzone').forEach(dropzone => {
-    dropzone.addEventListener('dragover', e => {
+    dropzone.addEventListener('touchstart', e => {
         e.preventDefault();
-    });
-
-    const dropItem = () => {
-        if (!dropzone.querySelector('.draggable') && draggedItem) {
+        if (draggedItem && !dropzone.querySelector('.draggable')) {
             dropzone.appendChild(draggedItem);
+            draggedItem.style.opacity = '1'; // Restore full opacity
+            draggedItem = null; // Reset the dragged item
         }
-    };
-
-    dropzone.addEventListener('drop', dropItem);
-
-    // touch event equivalent for drop
-    dropzone.addEventListener('touchmove', e => {
-        e.preventDefault(); // this prevents the default scrolling behaviour which can interfere with our touch drag
     });
-    dropzone.addEventListener('touchend', dropItem);
 });
+
 
 //end mobile
 
