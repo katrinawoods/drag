@@ -71,11 +71,16 @@ button:hover {
 
 #instruction-container {
     margin-bottom: 60px; /* Extra spacing after instructions */
-    font-style: italic; /* Optional: Style the instruction text to stand out */
 }
 
 #button-container {
     margin-top: 30px; /* Adds space between the drag activity and the button */
+}
+
+.divider {
+    height: 20px; 
+    background-color: #cccccc; 
+    margin: 10px 0; 
 }
 
 .myText {
