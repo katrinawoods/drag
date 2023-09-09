@@ -1,6 +1,8 @@
 const correctOrder = ["A. Burrows, ", "Chemistry³: introducing inorganic, organic and physical chemistry, ", "Oxford University Press, ", "Oxford, ", "3rd edn., ", "2017."];
 
 let draggedItem = null;
+let draggedItem = null;
+let selectedItem = null; // Initialize selectedItem
 
 document.addEventListener("DOMContentLoaded", function(event) {
     const shuffledOrder = shuffleArray([...correctOrder]);
@@ -16,6 +18,40 @@ function shuffleArray(array) {
     }
     return array;
 }
+
+//keyboard controls
+document.querySelectorAll('.draggable').forEach((item, idx, array) => {
+    item.addEventListener('keydown', e => {
+        if (selectedItem && e.key === 'ArrowDown' && !selectedItem.parentElement.classList.contains('dropzone')) {
+            const availableDropzone = [...document.querySelectorAll('.dropzone')].find(dropzone => !dropzone.querySelector('.draggable'));
+            if (availableDropzone) {
+                availableDropzone.appendChild(selectedItem);
+            }
+        } else if (selectedItem && e.key === 'ArrowUp' && selectedItem.parentElement.classList.contains('dropzone')) {
+            const container = document.getElementById('container');
+            container.insertBefore(selectedItem, array[idx]);
+        } else if (selectedItem && e.key === 'ArrowRight' && selectedItem.parentElement.classList.contains('dropzone') && idx + 1 < array.length) {
+            const nextDropzone = document.querySelectorAll('.dropzone')[idx + 1];
+            if (!nextDropzone.querySelector('.draggable')) {
+                nextDropzone.appendChild(selectedItem);
+            }
+        } else if (selectedItem && e.key === 'ArrowLeft' && selectedItem.parentElement.classList.contains('dropzone') && idx - 1 >= 0) {
+            const prevDropzone = document.querySelectorAll('.dropzone')[idx - 1];
+            if (!prevDropzone.querySelector('.draggable')) {
+                prevDropzone.appendChild(selectedItem);
+            }
+        } else if (e.key === 'Enter' || e.key === 'Space') {
+            if (selectedItem) {
+                selectedItem.style.backgroundColor = ''; // Reset background color when dropped
+                selectedItem = null; // Deselect the word
+            } else {
+                selectedItem = item;
+                selectedItem.style.backgroundColor = 'lightblue'; // Highlight background when selected
+            }
+            e.preventDefault(); // Prevent the default action (scrolling)
+        }
+    });
+});
 
 // Mouse drag-and-drop controls
 document.querySelectorAll('.draggable').forEach(draggable => {
