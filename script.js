@@ -95,6 +95,60 @@ document.querySelectorAll('.dropzone').forEach(dropzone => {
     });
 });
 
+//mobile
+// Mouse and touch drag-and-drop controls
+document.querySelectorAll('.draggable').forEach(draggable => {
+
+    const startDrag = () => {
+        draggedItem = draggable;
+        draggable.style.display = 'none';
+    };
+    
+    const endDrag = () => {
+        if (draggedItem) {
+            draggedItem.style.display = '';
+            draggedItem = null;
+        }
+    };
+
+    draggable.addEventListener('dragstart', startDrag);
+    draggable.addEventListener('dragend', endDrag);
+
+    // touch event equivalent for dragstart
+    draggable.addEventListener('touchstart', e => {
+        e.preventDefault();
+        startDrag();
+    });
+    
+    // touch event equivalent for dragend
+    draggable.addEventListener('touchend', e => {
+        e.preventDefault();
+        endDrag();
+    });
+});
+
+document.querySelectorAll('.dropzone').forEach(dropzone => {
+    dropzone.addEventListener('dragover', e => {
+        e.preventDefault();
+    });
+
+    const dropItem = () => {
+        if (!dropzone.querySelector('.draggable') && draggedItem) {
+            dropzone.appendChild(draggedItem);
+        }
+    };
+
+    dropzone.addEventListener('drop', dropItem);
+
+    // touch event equivalent for drop
+    dropzone.addEventListener('touchmove', e => {
+        e.preventDefault(); // this prevents the default scrolling behaviour which can interfere with our touch drag
+    });
+    dropzone.addEventListener('touchend', dropItem);
+});
+
+//end mobile
+
 function checkOrder() {
     const currentOrder = Array.from(document.querySelectorAll('.dropzone .draggable')).map(item => item.textContent);
     let isCorrect = true;
