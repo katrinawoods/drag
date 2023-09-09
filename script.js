@@ -56,13 +56,16 @@ function checkOrder() {
     let isCorrect = true; // We assume the answer is correct initially
 
     currentOrder.forEach((word, index) => {
-        const currentWordElement = document.getElementById(`word${index + 1}`);
+        const currentDropzone = document.getElementById(`drop${index + 1}`);
+        const draggableItem = currentDropzone.querySelector('.draggable');
 
-        if (word === correctOrder[index]) {
-            currentWordElement.style.backgroundColor = 'lightgreen';
-        } else {
-            currentWordElement.style.backgroundColor = 'lightcoral';
-            isCorrect = false; // If any word is incorrect, we update our assumption
+        if (draggableItem) {
+            if (word === correctOrder[index]) {
+                draggableItem.style.backgroundColor = 'lightgreen';
+            } else {
+                draggableItem.style.backgroundColor = 'lightcoral';
+                isCorrect = false; // If any word is incorrect, we update our assumption
+            }
         }
     });
 
@@ -74,5 +77,6 @@ function checkOrder() {
         feedbackContainer.textContent = "Incorrect. Try again.";
         feedbackContainer.style.color = "red";
     }
+
 }
 
