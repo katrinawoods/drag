@@ -56,10 +56,12 @@ function checkOrder() {
     let isCorrect = true; // We assume the answer is correct initially
 
     currentOrder.forEach((word, index) => {
+        const currentWordElement = document.getElementById(`word${index + 1}`);
+
         if (word === correctOrder[index]) {
-            document.getElementById(`word${index + 1}`).style.backgroundColor = 'lightgreen';
+            currentWordElement.style.backgroundColor = 'lightgreen';
         } else {
-            document.getElementById(`word${index + 1}`).style.backgroundColor = 'lightcoral';
+            currentWordElement.style.backgroundColor = 'lightcoral';
             isCorrect = false; // If any word is incorrect, we update our assumption
         }
     });
@@ -69,7 +71,7 @@ function checkOrder() {
         feedbackContainer.textContent = "Correct! Well done.";
         feedbackContainer.style.color = "green";
     } else {
-        feedbackContainer.textContent = "That is not correct. Please try again.";
+        feedbackContainer.textContent = "Incorrect. Try again.";
         feedbackContainer.style.color = "red";
     }
 }
