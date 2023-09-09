@@ -53,11 +53,24 @@ document.getElementById("checkAnswerButton").addEventListener('click', () => {
 
 function checkOrder() {
     const currentOrder = Array.from(document.querySelectorAll('.dropzone .draggable')).map(item => item.textContent);
+    let isCorrect = true; // We assume the answer is correct initially
+
     currentOrder.forEach((word, index) => {
         if (word === correctOrder[index]) {
             document.getElementById(`word${index + 1}`).style.backgroundColor = 'lightgreen';
         } else {
             document.getElementById(`word${index + 1}`).style.backgroundColor = 'lightcoral';
+            isCorrect = false; // If any word is incorrect, we update our assumption
         }
     });
+
+    const feedbackContainer = document.getElementById("feedback-container");
+    if (isCorrect) {
+        feedbackContainer.textContent = "Correct! Well done.";
+        feedbackContainer.style.color = "green";
+    } else {
+        feedbackContainer.textContent = "That is not correct. Please try again.";
+        feedbackContainer.style.color = "red";
+    }
 }
+
