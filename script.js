@@ -1,4 +1,4 @@
-const correctOrder = ["The", "library", "opened", "in", "the", "year", "2018"];
+const correctOrder = ["A. Burrows, ", "Chemistry³: introducing inorganic, organic and physical chemistry, ", "Oxford University Press, ", "Oxford, ", "3rd edn., ", "2017.";
 let selectedItem = null;
 let currentOrderIndex = 0; // Keep track of the current correct word index
 
