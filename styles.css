@@ -64,3 +64,16 @@ button:hover {
     overflow: hidden;
 }
 
+
+#title-container {
+    margin-bottom: 20px;
+}
+
+#instruction-container {
+    margin-bottom: 30px; /* Extra spacing after instructions */
+    font-style: italic; /* Optional: Style the instruction text to stand out */
+}
+
+#button-container {
+    margin-top: 30px; /* Adds space between the drag activity and the button */
+}
