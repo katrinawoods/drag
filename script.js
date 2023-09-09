@@ -1,7 +1,6 @@
 const correctOrder = ["A. Burrows, ", "Chemistry³: introducing inorganic, organic and physical chemistry, ", "Oxford University Press, ", "Oxford, ", "3rd edn., ", "2017."];
 
 let draggedItem = null;
-let draggedItem = null;
 let selectedItem = null; // Initialize selectedItem
 
 document.addEventListener("DOMContentLoaded", function(event) {
@@ -61,7 +60,7 @@ document.querySelectorAll('.draggable').forEach(draggable => {
             draggable.style.display = 'none';
         }, 0);
     });
-
+    
     draggable.addEventListener('dragend', () => {
         setTimeout(() => {
             draggedItem.style.display = '';
@@ -83,8 +82,16 @@ document.querySelectorAll('.dropzone').forEach(dropzone => {
     });
 });
 
-document.getElementById("checkAnswerButton").addEventListener('click', () => {
-    checkOrder();
+document.getElementById("actionButton").addEventListener('click', function() {
+    if (this.textContent === "Check Answer") {
+        checkOrder();
+        this.textContent = "Reset";  // Change button text to 'Reset'
+    } else if (this.textContent === "Reset") {
+        resetDraggables();
+        this.textContent = "Check Answer"; // Change button text back to 'Check Answer'
+        const feedbackContainer = document.getElementById("feedback-container");
+        feedbackContainer.textContent = ""; // Clear feedback message
+    }
 });
 
 function checkOrder() {
@@ -113,6 +120,15 @@ function checkOrder() {
         feedbackContainer.textContent = "Incorrect. Try again.";
         feedbackContainer.style.color = "red";
     }
-
 }
+
+function resetDraggables() {
+    const shuffledOrder = shuffleArray([...correctOrder]);
+    shuffledOrder.forEach((word, index) => {
+        document.getElementById(`word${index + 1}`).textContent = word;
+        const container = document.getElementById('container');
+        container.appendChild(document.getElementById(`word${index + 1}`)); // move them back to original position
+    });
+}
+ 
 
