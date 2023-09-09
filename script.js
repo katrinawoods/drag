@@ -119,7 +119,7 @@ if (isCorrect) {
     feedbackMessage.textContent = "Correct! Well done.";
     feedbackMessage.style.color = "green";
 } else {
-    feedbackMessage.textContent = "Incorrect. Try again.";
+    feedbackMessage.textContent = "That is not correct. Please try again.";
     feedbackMessage.style.color = "red";
 }
     
