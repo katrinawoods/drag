@@ -1,6 +1,6 @@
-const correctOrder = ["A. Burrows, ", "Chemistry³: introducing inorganic, organic and physical chemistry, ", "Oxford University Press, ", "Oxford, ", "3rd edn., ", "2017.";
-let selectedItem = null;
-let currentOrderIndex = 0; // Keep track of the current correct word index
+const correctOrder = ["A. Burrows, ", "Chemistry³: introducing inorganic, organic and physical chemistry, ", "Oxford University Press, ", "Oxford, ", "3rd edn., ", "2017."];
+
+let draggedItem = null;
 
 document.addEventListener("DOMContentLoaded", function(event) {
     const shuffledOrder = shuffleArray([...correctOrder]);
@@ -61,4 +61,3 @@ function checkOrder() {
         }
     });
 }
-
