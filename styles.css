@@ -1,8 +1,13 @@
+:root {
+    --main-bg-color: #F9F9F9;
+    --accent-color: #00C1D4;
+}
+
 body {
     font-family: Arial, sans-serif;
     color: navy;   
     margin: 20px;
-    background-color: #F9F9F9;
+    background-color: var(--main-bg-color);
 }
 
 #container {
@@ -27,13 +32,13 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     border: 1px solid #ddd;
-    background-color: #f9F9F9;
+    background-color: var(--main-bg-color);
     word-wrap: break-word;
     overflow: hidden;
 }
 
 .draggable:hover, .draggable:focus {
-    outline: 2px solid #00C1D4;
+    outline: 2px solid var(--accent-color);
 }
 
 /* Drop Zones */
@@ -46,22 +51,22 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     border: 2px dashed #aaa;
-    background-color: #F9F9F9;
+    background-color: var(--main-bg-color);
     display: flex;
     align-items: center;
     justify-content: center; 
 }
 
 .dropzone:hover, .dropzone:focus, .dropzone:active {
-    outline: 2px solid #00C1D4;
+    outline: 2px solid var(--accent-color);
 }
 
 /* Buttons */
 button {
     display: block;
-    margin: 0 auto;
+    margin: 0 auto 20px; /* Shorthand property */
     padding: 10px 20px;
-    background-color: #00C1D4;
+    background-color: var(--accent-color);
     color: black;
     border: none;
     cursor: pointer;
@@ -79,13 +84,12 @@ button:hover {
 }
 
 #instruction-container {
-    margin-bottom: 60px; /* Extra spacing after instructions */
+    margin-bottom: 60px;
 }
 
 #button-container {
     margin-top: 30px;
 }
-
 
 #feedback-container {
     display: flex;
@@ -95,6 +99,4 @@ button:hover {
     padding: 10px;
     border: 1px solid #ddd;
     text-align: left;
-}
-
 }
